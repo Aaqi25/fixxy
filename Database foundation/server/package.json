@@ -1,0 +1,28 @@
+{
+  "name": "fixxy-server",
+  "version": "0.1.0",
+  "description": "FIXXY backend — Module 9: Database Foundation",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "db:migrate": "ts-node --project tsconfig.json scripts/migrate.ts",
+    "db:seed": "ts-node --project tsconfig.json scripts/seed.ts",
+    "db:check": "ts-node --project tsconfig.json scripts/check-db.ts",
+    "db:verify": "ts-node --project tsconfig.json scripts/verify.ts",
+    "dev": "ts-node-dev --respawn --project tsconfig.json src/index.ts"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "pg": "^8.12.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "@types/pg": "^8.11.6",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.5.3"
+  }
+}

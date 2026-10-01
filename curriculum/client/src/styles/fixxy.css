@@ -1,0 +1,518 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* ================================================
+   FIXXY Design System — Glass UI
+   iOS-inspired glassmorphism learning interface
+   ================================================ */
+
+/* Root variables */
+
+:root {
+  --color-bg-from: #a9ccef;
+  --color-bg-mid: #dcecfb;
+  --color-bg-to: #a8c9ec;
+  --color-text-primary: #14243d;
+  --color-text-secondary: #3d5a7a;
+  --color-text-muted: #6b8ba4;
+  --color-button-primary: #193650;
+  --color-button-hover: #284d70;
+  --color-glass-bg: rgba(255, 255, 255, 0.58);
+  --color-glass-border: rgba(255, 255, 255, 0.8);
+  --color-input-bg: rgba(255, 255, 255, 0.7);
+  --color-input-border: rgba(32, 70, 115, 0.15);
+  --color-input-focus: rgba(25, 54, 80, 0.3);
+  --color-error: #c62a47;
+  --color-error-bg: rgba(198, 42, 71, 0.08);
+  --color-success: #1a7245;
+  --color-success-bg: rgba(26, 114, 69, 0.08);
+}
+
+/* Base reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--color-text-primary);
+  line-height: 1.6;
+}
+
+/* ================================================
+   FIXXY Page — Full viewport background
+   ================================================ */
+.fixxy-page {
+  min-height: 100vh;
+  color: var(--color-text-primary);
+  background:
+    radial-gradient(
+      circle at 20% 12%,
+      #f7fcff 0,
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 85% 35%,
+      #d6eaff 0,
+      transparent 38%
+    ),
+    linear-gradient(
+      135deg,
+      var(--color-bg-from),
+      var(--color-bg-mid) 55%,
+      var(--color-bg-to)
+    );
+}
+
+/* ================================================
+   Glass surface card
+   ================================================ */
+.glass {
+  background: var(--color-glass-bg);
+  -webkit-backdrop-filter: blur(22px) saturate(150%);
+  backdrop-filter: blur(22px) saturate(150%);
+  border: 1px solid var(--color-glass-border);
+  border-radius: 24px;
+  box-shadow:
+    0 16px 40px rgba(32, 70, 115, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* ================================================
+   Auth form layout
+   ================================================ */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.auth-brand {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.auth-brand-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--color-text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.auth-brand-tagline {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 2.5rem 2rem;
+}
+
+.auth-card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 0.4rem;
+}
+
+.auth-card-subtitle {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-bottom: 2rem;
+}
+
+/* ================================================
+   Form inputs
+   ================================================ */
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  color: var(--color-text-primary);
+  background: var(--color-input-bg);
+  border: 1.5px solid var(--color-input-border);
+  border-radius: 12px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  outline: none;
+}
+
+.form-input::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.7;
+}
+
+.form-input:focus {
+  border-color: var(--color-button-primary);
+  box-shadow: 0 0 0 3px var(--color-input-focus);
+}
+
+.form-input.input-error {
+  border-color: var(--color-error);
+}
+
+.form-field-error {
+  font-size: 0.78rem;
+  color: var(--color-error);
+  margin-top: 0.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* ================================================
+   Primary button
+   ================================================ */
+.primary-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.875rem 1.25rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: white;
+  background: var(--color-button-primary);
+  border: 0;
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(25, 54, 80, 0.18);
+  transition: background 0.15s ease, transform 0.12s ease, box-shadow 0.15s ease;
+  letter-spacing: 0.01em;
+  margin-top: 0.5rem;
+}
+
+.primary-button:hover:not(:disabled) {
+  background: var(--color-button-hover);
+  box-shadow: 0 10px 22px rgba(25, 54, 80, 0.25);
+  transform: translateY(-1px);
+}
+
+.primary-button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 6px 14px rgba(25, 54, 80, 0.15);
+}
+
+.primary-button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* ================================================
+   Alert / error banner
+   ================================================ */
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+}
+
+.alert-error {
+  background: var(--color-error-bg);
+  border: 1px solid rgba(198, 42, 71, 0.2);
+  color: var(--color-error);
+}
+
+.alert-success {
+  background: var(--color-success-bg);
+  border: 1px solid rgba(26, 114, 69, 0.2);
+  color: var(--color-success);
+}
+
+/* ================================================
+   Auth footer link
+   ================================================ */
+.auth-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.auth-link {
+  color: var(--color-button-primary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.12s ease;
+}
+
+.auth-link:hover {
+  color: var(--color-button-hover);
+  text-decoration: underline;
+}
+
+/* ================================================
+   Spinner
+   ================================================ */
+.fixxy-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(25, 54, 80, 0.15);
+  border-top-color: var(--color-button-primary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+.button-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ================================================
+   Dashboard / Home page
+   ================================================ */
+.dashboard-header {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dashboard-nav-brand {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: -0.02em;
+}
+
+.dashboard-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+.welcome-card {
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.welcome-greeting {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.welcome-subtitle {
+  color: var(--color-text-muted);
+  font-size: 0.9375rem;
+}
+
+.logout-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  background: rgba(25, 54, 80, 0.08);
+  border: 1px solid rgba(25, 54, 80, 0.15);
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  font-family: inherit;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.logout-button:hover {
+  background: rgba(25, 54, 80, 0.15);
+}
+
+/* ================================================
+   Info cards grid
+   ================================================ */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.info-card {
+  padding: 1.5rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.info-card-icon {
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.info-card-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  margin-bottom: 0.35rem;
+}
+
+.info-card-value {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+/* ================================================
+   404 Page
+   ================================================ */
+.not-found-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.not-found-card {
+  text-align: center;
+  padding: 3rem 2.5rem;
+  max-width: 440px;
+  width: 100%;
+}
+
+.not-found-code {
+  font-size: 5rem;
+  font-weight: 800;
+  color: var(--color-text-primary);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.not-found-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.not-found-subtitle {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin-bottom: 2rem;
+}
+
+/* ================================================
+   Divider
+   ================================================ */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(32, 70, 115, 0.1), transparent);
+  margin: 1.5rem 0;
+}
+
+/* ================================================
+   Responsive
+   ================================================ */
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+  }
+
+  .auth-brand-title {
+    font-size: 2rem;
+  }
+
+  .not-found-code {
+    font-size: 4rem;
+  }
+
+  .welcome-greeting {
+    font-size: 1.4rem;
+  }
+}
+
+/* ================================================
+   Module 3: Curriculum Glass UI & Interactions
+   ================================================ */
+.concept-card-container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 45px rgba(32, 70, 115, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.explore-button:hover {
+  background-color: var(--color-button-hover) !important;
+  transform: translateX(2px);
+}
+
+.explore-button:focus-visible,
+#back-to-curriculum-link:focus-visible,
+#start-learning-button:focus-visible,
+#retry-curriculum-button:focus-visible,
+#retry-concept-detail-button:focus-visible {
+  outline: 3px solid rgba(25, 54, 80, 0.4);
+  outline-offset: 2px;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 640px) {
+  .concepts-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .learning-path-flow {
+    grid-template-columns: 1fr !important;
+  }
+}
+
