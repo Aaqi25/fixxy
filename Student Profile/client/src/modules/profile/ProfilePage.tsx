@@ -418,7 +418,7 @@ export const ProfilePage: React.FC = () => {
                       Adaptive AI Diagnosis Ready
                     </h3>
                     <p style={{ fontSize: '0.8125rem', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
-                      When you answer questions in Module 4 & 5, FIXXY will calibrate misconceptions against your{' '}
+                      When you answer questions, FIXXY will calibrate misconceptions against your{' '}
                       <strong>{profile.learningLevel}</strong> level and formulate tutor responses using{' '}
                       <strong>{profile.preferredLearningStyle}</strong> mode.
                     </p>

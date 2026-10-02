@@ -19,7 +19,7 @@ export const ConceptDetailPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isNotFound, setIsNotFound] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [learningNotice, setLearningNotice] = useState<string | null>(null);
+  const [learningNotice] = useState<string | null>(null);
 
   const loadConcept = useCallback(async () => {
     if (!slug) {
@@ -55,10 +55,9 @@ export const ConceptDetailPage: React.FC = () => {
   };
 
   const handleStartLearning = () => {
-    // Connect to future learning/question flow
-    setLearningNotice(
-      `You're ready to practice ${concept?.title}! The Question Engine & Adaptive Diagnosis flow connects here in Module 4.`
-    );
+    if (slug) {
+      navigate(`/curriculum/${slug}/practice`);
+    }
   };
 
   // 404 Not Found State

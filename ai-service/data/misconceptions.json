@@ -1,0 +1,120 @@
+{
+  "concept": "overfitting",
+  "version": "1.0.0",
+  "misconceptions": [
+    {
+      "id": "ov_memorization_is_learning",
+      "short_id": "M1",
+      "concept": "overfitting",
+      "name": "High Training Accuracy Equals General Learning",
+      "description": "Student equates near-perfect training accuracy with true learning, failing to realize the model may have simply memorized training samples and noise instead of extracting generalizable patterns.",
+      "detection_examples": [
+        "My model got 99.5% accuracy on the training set, so it is ready for production.",
+        "Since training error is zero, the model has mastered the task completely.",
+        "High training accuracy always means the model understands the underlying distribution."
+      ],
+      "correct_concept": "True learning in machine learning is measured by generalization to unseen validation and test data, not by memorization of training instances.",
+      "analogy": "A student memorizing exact practice exam answers word-for-word rather than learning the underlying mathematical principles; they get 100% on practice tests but fail the real exam.",
+      "simple_example": "A decision tree that splits until every single training house price is isolated in its own leaf node, achieving 0 training error but erratic predictions for any new house.",
+      "technical_explanation": "When empirical risk minimization achieves zero loss by matching high-frequency sample variance rather than true data-generating distribution p(y|x), the model suffers from high variance and poor generalization error.",
+      "hint": "Ask yourself: How do we know the model didn't just memorize the exact training examples like flashcards?",
+      "retry_question": "A polynomial regression model achieves 100% accuracy on 50 training points but only 52% on 50 new test points. Why is the 100% training score misleading?",
+      "transfer_question": "A facial recognition model recognizes all 100 employees in training photos with 100% accuracy, but fails on new photos of the same employees taken under different lighting. What fundamental issue is occurring?"
+    },
+    {
+      "id": "ov_more_features_always_better",
+      "short_id": "M2",
+      "concept": "overfitting",
+      "name": "Adding More Features Always Improves Model",
+      "description": "Student believes including as many input features as possible always increases performance, unaware that irrelevant or redundant features add noise and increase overfitting risk.",
+      "detection_examples": [
+        "I will add all 500 columns from the database because more information is always better for AI.",
+        "Removing features will only lose information, so we should keep every feature.",
+        "More input features automatically make the model more accurate on test data."
+      ],
+      "correct_concept": "Extra features expand the hypothesis space exponentially (curse of dimensionality), enabling models to find spurious correlations in noise unless features are genuinely predictive.",
+      "analogy": "Trying to predict tomorrow's weather by measuring humidity and pressure, but also adding the color of your socks and your neighbor's dog's barking schedule.",
+      "simple_example": "Predicting student exam scores using study hours, attendance, plus random ID numbers and birth second; the model correlates random IDs with top scores.",
+      "technical_explanation": "As the feature dimension d grows relative to sample size n, data points become sparse in high-dimensional space, drastically increasing the sample complexity required to avoid fitting noise.",
+      "hint": "Consider whether every single feature contains genuine signal or just random accidental patterns.",
+      "retry_question": "Why can adding 200 random noise features to a dataset cause a linear regression model to perform worse on test data?",
+      "transfer_question": "In a medical diagnosis dataset with 100 patients, you have 10,000 gene expression measurements. Why might a model trained on all 10,000 genes fail on new hospital patients?"
+    },
+    {
+      "id": "ov_more_data_alone_solves_all",
+      "short_id": "M3",
+      "concept": "overfitting",
+      "name": "Overfitting Only Happens With Small Datasets",
+      "description": "Student assumes that having a large dataset completely immunizes any model against overfitting, ignoring the relationship between dataset size and model capacity.",
+      "detection_examples": [
+        "We have 1 million rows, so our model cannot possibly overfit.",
+        "Overfitting is only a problem when you have fewer than 1,000 data points.",
+        "Big data eliminates the need for regularization or validation sets."
+      ],
+      "correct_concept": "Overfitting is a function of the ratio between model capacity (parameters/expressiveness) and effective independent sample size; huge models can readily overfit massive datasets.",
+      "analogy": "A library with a million books can still be completely memorized by a supercomputer with infinite hard drive storage.",
+      "simple_example": "A modern 500-billion parameter neural network trained on 1 million samples has enough capacity to memorize the exact dataset without learning general rules.",
+      "technical_explanation": "According to VC dimension and Rademacher complexity, generalization bounds depend on both sample size n and model capacity. If capacity exceeds effective sample size or if label noise exists, overfitting will occur.",
+      "hint": "Think about how model capacity (number of parameters) compares to the size of the dataset.",
+      "retry_question": "If a neural network has 50 million parameters and is trained on 100,000 samples without regularization, why can it still overfit despite having 100,000 samples?",
+      "transfer_question": "An autonomous driving company trains a massive vision transformer on 5 million street images from sunny California. Why might the vehicle struggle when deployed in snowy Boston?"
+    },
+    {
+      "id": "ov_regularization_eliminates_all_overfitting",
+      "short_id": "M4",
+      "concept": "overfitting",
+      "name": "Regularization Guarantees Zero Overfitting",
+      "description": "Student views regularization (such as L1/L2 penalties or dropout) as an absolute cure-all that automatically eliminates all overfitting without requiring tuning or validation checks.",
+      "detection_examples": [
+        "I added Dropout(0.2) to my network so overfitting is completely solved.",
+        "L2 weight decay prevents any possibility of overfitting.",
+        "Once regularization is added, we don't need to check validation loss curves anymore."
+      ],
+      "correct_concept": "Regularization constrains model capacity and penalizes complexity, but inappropriate regularization strength can still leave the model overfitted (if too weak) or cause underfitting (if too strong).",
+      "analogy": "Wearing a seatbelt reduces injury risk in an accident, but it doesn't make a car crash-proof if you drive recklessly at 200 mph.",
+      "simple_example": "Setting an L2 penalty lambda to 0.0000001 has virtually zero regularization effect, allowing the network to overfit almost identically to an unregularized model.",
+      "technical_explanation": "Regularization adds a prior penalty R(w) to the loss function J(w) = L(w) + lambda * R(w). The hyperparameter lambda must be calibrated on validation data; it does not intrinsically guarantee optimal inductive bias.",
+      "hint": "What happens if the regularization penalty is set too small or too large?",
+      "retry_question": "A machine learning engineer adds L1 regularization with lambda=1e-8 to a polynomial model and still observes severe overfitting on test data. Why didn't regularization solve the problem?",
+      "transfer_question": "You enable 10% dropout on an image classification network, but validation accuracy starts dropping while training accuracy also drops to 40%. What mistake occurred regarding regularization tuning?"
+    },
+    {
+      "id": "ov_complex_models_always_superior",
+      "short_id": "M5",
+      "concept": "overfitting",
+      "name": "Higher Model Complexity Is Always Better",
+      "description": "Student assumes that the most complex, deep, or parameter-heavy architecture is always superior to simpler baselines, disregarding the bias-variance tradeoff.",
+      "detection_examples": [
+        "A 50-layer neural network is always better than a simple logistic regression.",
+        "We should always choose the model with the highest capacity to maximize learning.",
+        "Simpler models are obsolete; we should always use complex ensemble models."
+      ],
+      "correct_concept": "According to Occam's Razor and the bias-variance tradeoff, the optimal model is the simplest one that adequately captures the true data signal without modeling sample noise.",
+      "analogy": "Using an industrial chainsaw with laser guidance to slice a soft banana when a butter knife produces cleaner, safer results.",
+      "simple_example": "Fitting a degree-15 polynomial to 8 data points that lie almost perfectly on a straight line; the degree-15 curve wildly oscillates between the points.",
+      "technical_explanation": "Excessive hypothesis class complexity introduces high model variance Var(f_hat(x)). When the true target function is relatively smooth, simpler models with slightly higher bias often achieve significantly lower Mean Squared Error (MSE).",
+      "hint": "What principle in science suggests we should prefer simpler explanations when data can be explained simply?",
+      "retry_question": "For a dataset with 50 rows and a clear linear trend, why does a linear regression model outperform a 10-layer deep neural network on test data?",
+      "transfer_question": "A startup builds a customer churn prediction model using 200 tabular records. Why might an XGBoost with 1000 depth-10 trees perform worse in production than a regularized logistic regression?"
+    },
+    {
+      "id": "ov_validation_loss_is_optional",
+      "short_id": "M6",
+      "concept": "overfitting",
+      "name": "Training Loss Decline Is All That Matters",
+      "description": "Student tracks only training loss during optimization and ignores rising validation loss, failing to recognize divergence as the hallmark signature of overfitting.",
+      "detection_examples": [
+        "The training loss kept decreasing all the way to epoch 500, so the training was a huge success.",
+        "Why look at validation curves when training loss is reaching zero?",
+        "As long as loss is going down on each iteration, we should keep training."
+      ],
+      "correct_concept": "During iterative training, validation loss reaches a minimum and begins to climb when the model begins learning sample noise — this inflection point signals when training should stop (early stopping).",
+      "analogy": "Studying for an exam past the point of exhaustion until you start confusing real facts with random dreams — you spend more hours studying, but your actual exam readiness gets worse.",
+      "simple_example": "At epoch 20, training loss is 0.3 and validation loss is 0.32. At epoch 100, training loss is 0.05 but validation loss has climbed to 0.78.",
+      "technical_explanation": "Optimization loss evaluates empirical risk on the training distribution. The generalization gap |L_train - L_val| widens past the early stopping optimum, indicating that optimization is fitting empirical noise rather than minimizing true population risk.",
+      "hint": "What happens to validation loss when a model starts memorizing noise during later epochs?",
+      "retry_question": "During training, training loss decreases from 0.4 to 0.02 between epochs 10 and 50, while validation loss increases from 0.35 to 0.85. What is happening to the model?",
+      "transfer_question": "You set up a training loop for 1,000 epochs with no early stopping. How would you determine from the loss curves which checkpoint model weights to deploy to production?"
+    }
+  ]
+}

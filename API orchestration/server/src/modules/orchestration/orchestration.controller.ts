@@ -77,6 +77,22 @@ export class OrchestrationController {
       next(err);
     }
   };
+
+  /**
+   * POST /api/learning/tutor/chat (or /api/orchestration/tutor/chat)
+   * Multi-turn conversational chat with FIXXY Tutor.
+   */
+  chatWithTutor = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const studentId = req.user?.studentId;
+      const body = req.body || {};
+
+      const response = await this.service.chatWithTutor(studentId, body);
+      res.status(200).json(response);
+    } catch (err) {
+      next(err);
+    }
+  };
 }
 
 export const orchestrationController = new OrchestrationController();

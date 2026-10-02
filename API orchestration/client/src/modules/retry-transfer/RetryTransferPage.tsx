@@ -473,8 +473,20 @@ export const RetryTransferPage: React.FC = () => {
                 <TeachingPanel
                   teaching={teachingData}
                   isReteach={stage === 'RETEACHING'}
-                  onContinueToRetry={stage === 'TEACHING' ? handleContinueToRetry : undefined}
+                  onContinueToRetry={
+                    stage === 'TEACHING'
+                      ? handleContinueToRetry
+                      : stage === 'RETEACHING'
+                      ? handleContinueFromReteach
+                      : undefined
+                  }
+                  continueLabel={stage === 'RETEACHING' ? 'Try Question Again →' : 'Continue to Retry Question →'}
                   isContinuing={isAdvancing}
+                  concept={session?.conceptTitle || slug?.replace(/-/g, ' ') || 'Concept'}
+                  conceptSlug={session?.conceptSlug || slug}
+                  questionPrompt={session?.originalQuestion?.prompt || activeQuestion?.prompt}
+                  studentAnswerText={session?.originalQuestion?.prompt ? 'Incorrect answer provided during initial attempt' : undefined}
+                  correctAnswerText={session?.conceptTitle ? `Core principles of ${session.conceptTitle}` : undefined}
                 />
               )}
             </aside>

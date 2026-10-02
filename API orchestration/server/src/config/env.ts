@@ -27,6 +27,7 @@ export const env = {
   clientUrl: optional('CLIENT_URL', 'http://localhost:5173'),
   nodeEnv: optional('NODE_ENV', 'development'),
   dbPoolMax: parseInt(optional('DB_POOL_MAX', '10'), 10),
+  aiServiceUrl: optional('AI_SERVICE_URL', 'http://localhost:8000'),
   isProduction: optional('NODE_ENV', 'development') === 'production',
   cookieName: 'fixxy_token',
   jwtExpiresIn: '7d',

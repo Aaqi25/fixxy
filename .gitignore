@@ -5,6 +5,8 @@ node_modules/
 # Environment variables
 .env
 .env.*
+*.env
+**/*.env
 .env.local
 .env.development.local
 .env.test.local
@@ -25,6 +27,8 @@ coverage/
 **/coverage/
 *.lcov
 .nyc_output
+.pytest_cache/
+**/.pytest_cache/
 
 # Python
 __pycache__/

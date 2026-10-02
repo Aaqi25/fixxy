@@ -5,11 +5,14 @@ let _pool: Pool | null = null;
 
 export function getPool(): Pool {
   if (!_pool) {
+    const isLocal = env.databaseUrl.includes('localhost') || env.databaseUrl.includes('127.0.0.1');
     _pool = new Pool({
       connectionString: env.databaseUrl,
-      max: env.dbPoolMax,
+      max: env.dbPoolMax || 20,
       idleTimeoutMillis: 30_000,
-      connectionTimeoutMillis: 5_000,
+      connectionTimeoutMillis: 30_000,
+      keepAlive: true,
+      ssl: isLocal ? false : { rejectUnauthorized: false },
     });
 
     _pool.on('error', (err) => {

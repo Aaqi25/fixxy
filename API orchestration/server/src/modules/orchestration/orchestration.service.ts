@@ -368,12 +368,18 @@ export class OrchestrationService {
 
         // Misconception diagnosis
         let miscInfo = await this.repo.findOptionMisconceptionCode(option.id);
+        const correctOptRes = await pool.query(
+          'SELECT option_text FROM question_options WHERE question_id = $1 AND is_correct = TRUE LIMIT 1',
+          [question.id]
+        );
         teachingDto = await this.ai.getDiagnosisAndTeaching({
           conceptSlug: session.concept_slug,
           questionPrompt: question.prompt,
           selectedOptionText: option.option_text,
+          correctAnswerText: correctOptRes.rows[0]?.option_text,
           misconceptionCode: miscInfo?.code,
           isReteach: false,
+          studentId,
         });
 
         // Request distinct retry question from M4 Question Engine
@@ -503,6 +509,50 @@ export class OrchestrationService {
   ): Promise<SessionRestorationDto> {
     await sessionService.advanceSession(studentId, sessionId, targetStage);
     return this.getSessionState(studentId, sessionId);
+  }
+
+  /**
+   * Conversational tutor chat.
+   * Secure intermediary between student and FastAPI AI Brain.
+   * Chat does NOT mutate mastery or answer attempts.
+   */
+  async chatWithTutor(
+    studentId: string | undefined,
+    payload: {
+      concept: string;
+      question?: string;
+      correctAnswer?: string;
+      studentAnswer?: string;
+      misconceptionId?: string;
+      strategy?: string;
+      mastery?: number | null;
+      conversation?: Array<{ role: string; content: string }>;
+      message: string;
+    }
+  ): Promise<{ response: string; concept: string; misconceptionId?: string }> {
+    if (!studentId || !this.isValidUuid(studentId)) {
+      throw new UnauthorizedError('Authentication required');
+    }
+
+    if (!payload?.concept) {
+      throw new ValidationError('concept is required');
+    }
+
+    if (!payload?.message || typeof payload.message !== 'string' || !payload.message.trim()) {
+      throw new ValidationError('message must be a non-empty string');
+    }
+
+    return this.ai.chatWithTutor({
+      concept: payload.concept.trim(),
+      question: payload.question,
+      correctAnswer: payload.correctAnswer,
+      studentAnswer: payload.studentAnswer,
+      misconceptionId: payload.misconceptionId,
+      strategy: payload.strategy,
+      mastery: payload.mastery,
+      conversation: Array.isArray(payload.conversation) ? payload.conversation : [],
+      message: payload.message.trim(),
+    });
   }
 }
 

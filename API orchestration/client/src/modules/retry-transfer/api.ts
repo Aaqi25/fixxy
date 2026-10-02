@@ -102,3 +102,38 @@ export async function submitRetryOrTransferAnswer(
     body: JSON.stringify(payload),
   });
 }
+
+export interface TutorChatMessage {
+  role: 'user' | 'tutor';
+  content: string;
+}
+
+export interface SendTutorChatPayload {
+  concept: string;
+  question?: string;
+  correctAnswer?: string;
+  studentAnswer?: string;
+  misconceptionId?: string;
+  strategy?: string;
+  mastery?: number | null;
+  conversation: TutorChatMessage[];
+  message: string;
+}
+
+export interface SendTutorChatResponse {
+  response: string;
+  concept?: string;
+  misconceptionId?: string;
+}
+
+/**
+ * Send an interactive chat message to FIXXY Tutor.
+ * Node forwards to FastAPI Gemini Brain with complete learning context.
+ */
+export async function sendTutorChatMessage(payload: SendTutorChatPayload): Promise<SendTutorChatResponse> {
+  return apiFetch<SendTutorChatResponse>('/orchestration/tutor/chat', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  });
+}
+

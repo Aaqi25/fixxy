@@ -14,8 +14,8 @@ export function HomePage() {
     navigate('/login', { replace: true });
   };
 
-  const memberSince = student
-    ? 'Module 1 — Authentication'
+  const accountStatus = student
+    ? 'Active Student'
     : '';
 
   return (
@@ -68,20 +68,26 @@ export function HomePage() {
               <div className="info-card-value" style={{ color: '#1a7245' }}>Authenticated</div>
             </div>
             <div className="info-card">
-              <div className="info-card-icon">📦</div>
-              <div className="info-card-title">Module</div>
-              <div className="info-card-value">{memberSince}</div>
+              <div className="info-card-icon">⚡</div>
+              <div className="info-card-title">Account</div>
+              <div className="info-card-value">{accountStatus}</div>
             </div>
           </div>
         </div>
 
-        {/* Future modules notice */}
-        <div className="glass" style={{ padding: '1.5rem 2rem', opacity: 0.7 }}>
-          <p style={{ fontSize: '0.875rem', color: '#3d5a7a', textAlign: 'center' }}>
-            🔒 Module 2 — Student Profile | Module 3 — Curriculum | Module 4 — Question Engine
-            <br />
-            <span style={{ fontSize: '0.8rem', color: '#6b8ba4' }}>Coming in later modules</span>
+        {/* Quick navigation card */}
+        <div className="glass" style={{ padding: '1.5rem 2rem', textAlign: 'center' }}>
+          <p style={{ fontSize: '0.95rem', color: '#1e3a5f', fontWeight: 600, marginBottom: '0.35rem' }}>
+            Ready to configure your learning journey?
           </p>
+          <p style={{ fontSize: '0.8125rem', color: '#6b8ba4', marginBottom: '1.25rem' }}>
+            Manage your personal learning goals, target difficulty level, and preferences.
+          </p>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+            <Link to="/profile" className="auth-button" style={{ textDecoration: 'none', display: 'inline-block', width: 'auto', padding: '0.6rem 1.5rem' }}>
+              View Student Profile →
+            </Link>
+          </div>
         </div>
       </main>
     </div>

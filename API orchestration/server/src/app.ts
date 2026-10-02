@@ -72,6 +72,7 @@ export function createApp(): express.Application {
 
   // API Orchestration routes (Module 8)
   app.use('/api/learning', orchestrationRoutes);
+  app.use('/api/orchestration', orchestrationRoutes);
 
 
   // Protected route verification endpoint (for testing and integration verification)

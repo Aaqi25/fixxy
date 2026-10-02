@@ -24,4 +24,7 @@ router.post('/sessions/:sessionId/advance', orchestrationController.advanceSessi
 // POST /api/learning/answer - Unified learning-flow answer submission
 router.post('/answer', orchestrationController.processAnswer);
 
+// POST /api/learning/tutor/chat or /api/orchestration/tutor/chat - Interactive FIXXY Tutor chat
+router.post('/tutor/chat', orchestrationController.chatWithTutor);
+
 export const orchestrationRoutes = router;

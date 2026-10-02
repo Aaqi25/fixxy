@@ -1,0 +1,194 @@
+[
+  {
+    "id": "case_01",
+    "concept": "overfitting",
+    "question": "A model achieves 100% accuracy on the training set but 52% on the test set. What is happening?",
+    "correct_answer": "The model has overfitted by memorizing training instances and noise rather than learning general rules.",
+    "student_answer": "100% accuracy means the model learned the dataset perfectly and has no errors.",
+    "expected_misconception_id": "M1"
+  },
+  {
+    "id": "case_02",
+    "concept": "overfitting",
+    "question": "How do you know if an image classifier has truly learned to distinguish cats from dogs?",
+    "correct_answer": "By measuring its accuracy on an unseen test set of images taken in different settings.",
+    "student_answer": "If its training loss drops to 0.0001, it has mastered cat and dog recognition.",
+    "expected_misconception_id": "M1"
+  },
+  {
+    "id": "case_03",
+    "concept": "overfitting",
+    "question": "Why shouldn't you ship a model to production based purely on high training set score?",
+    "correct_answer": "Training score does not measure generalization to new customer data.",
+    "student_answer": "Because a high training score alone proves complete mastery, but you still need to check latency.",
+    "expected_misconception_id": "M1"
+  },
+  {
+    "id": "case_04",
+    "concept": "overfitting",
+    "question": "A decision tree is grown until each leaf contains only 1 sample, achieving 0 training error. Is this model optimal?",
+    "correct_answer": "No, it is heavily overfitted because it isolated individual noise points in leaves.",
+    "student_answer": "Yes, zero training error is the highest possible quality for a decision tree.",
+    "expected_misconception_id": "M1"
+  },
+  {
+    "id": "case_05",
+    "concept": "overfitting",
+    "question": "We have 100 patient records. Should we include all 4,000 available survey columns in our regression?",
+    "correct_answer": "No, adding 4,000 features for 100 rows will cause the model to fit random noise (curse of dimensionality).",
+    "student_answer": "Yes, always include every single column because more data features always improve machine learning models.",
+    "expected_misconception_id": "M2"
+  },
+  {
+    "id": "case_06",
+    "concept": "overfitting",
+    "question": "Why did adding 50 random noise columns to our house price dataset degrade test performance?",
+    "correct_answer": "The model found spurious, accidental correlations with the random noise features.",
+    "student_answer": "More features cannot hurt; the model probably just needed more training epochs.",
+    "expected_misconception_id": "M2"
+  },
+  {
+    "id": "case_07",
+    "concept": "overfitting",
+    "question": "Why is feature selection important before training on wide tabular data?",
+    "correct_answer": "It removes irrelevant columns that would otherwise allow the model to overfit noise.",
+    "student_answer": "Feature selection is harmful because removing any feature permanently discards valuable signal.",
+    "expected_misconception_id": "M2"
+  },
+  {
+    "id": "case_08",
+    "concept": "overfitting",
+    "question": "We collected 2 million customer interaction records. Can our 200-layer neural network still overfit?",
+    "correct_answer": "Yes, if model capacity is extremely high, it can still memorize noise even in large datasets.",
+    "student_answer": "No, having 2 million rows completely prevents any model from ever overfitting.",
+    "expected_misconception_id": "M3"
+  },
+  {
+    "id": "case_09",
+    "concept": "overfitting",
+    "question": "When does big data NOT protect against overfitting?",
+    "correct_answer": "When model capacity is massive or when training data has label noise / distribution shifts.",
+    "student_answer": "Overfitting is only a problem for small datasets with fewer than 500 samples.",
+    "expected_misconception_id": "M3"
+  },
+  {
+    "id": "case_10",
+    "concept": "overfitting",
+    "question": "A team trains a 500-billion parameter transformer on 1 million articles. Why does it produce hallucinations on unseen test articles?",
+    "correct_answer": "The model capacity vastly exceeds the sample size, leading to memorization of training text fragments.",
+    "student_answer": "Because 1 million articles is huge, so overfitting is impossible; it must be a tokenization bug.",
+    "expected_misconception_id": "M3"
+  },
+  {
+    "id": "case_11",
+    "concept": "overfitting",
+    "question": "I added Dropout(0.001) to my neural network, but test error is still rising. Why didn't regularization fix it?",
+    "correct_answer": "The regularization rate was far too weak to effectively constrain model capacity.",
+    "student_answer": "Adding any dropout automatically guarantees zero overfitting, so the test set must be corrupted.",
+    "expected_misconception_id": "M4"
+  },
+  {
+    "id": "case_12",
+    "concept": "overfitting",
+    "question": "Does enabling L2 weight decay guarantee that your model will generalize well?",
+    "correct_answer": "No, the weight decay hyperparameter lambda must be tuned appropriately on validation data.",
+    "student_answer": "Yes, once you add L2 penalty, overfitting is 100% eliminated without needing tuning.",
+    "expected_misconception_id": "M4"
+  },
+  {
+    "id": "case_13",
+    "concept": "overfitting",
+    "question": "A student sets L1 penalty lambda=1e-12 and claims their model is fully regularized. What is the issue?",
+    "correct_answer": "The penalty is essentially zero and provides no meaningful regularization constraint.",
+    "student_answer": "Having the word regularization in the loss function prevents all overfitting regardless of value.",
+    "expected_misconception_id": "M4"
+  },
+  {
+    "id": "case_14",
+    "concept": "overfitting",
+    "question": "For 80 data points with a simple linear relationship, should we use a 30-layer deep ResNet or Linear Regression?",
+    "correct_answer": "Linear Regression, because a 30-layer ResNet has excessive capacity and will fit random noise.",
+    "student_answer": "The 30-layer ResNet is always superior because deeper models are always better than simple linear models.",
+    "expected_misconception_id": "M5"
+  },
+  {
+    "id": "case_15",
+    "concept": "overfitting",
+    "question": "Why did a degree-15 polynomial perform worse on test data than a degree-2 polynomial for quadratic data?",
+    "correct_answer": "The degree-15 polynomial had excessive capacity and oscillated wildly between points to fit noise.",
+    "student_answer": "Higher degree polynomials are always mathematically superior because they have more coefficients to learn.",
+    "expected_misconception_id": "M5"
+  },
+  {
+    "id": "case_16",
+    "concept": "overfitting",
+    "question": "When should you prefer a simpler linear model over a complex ensemble of deep networks?",
+    "correct_answer": "When the dataset is small and the underlying signal is relatively linear, reducing variance.",
+    "student_answer": "Never, complex architectures should always be used for all machine learning tasks.",
+    "expected_misconception_id": "M5"
+  },
+  {
+    "id": "case_17",
+    "concept": "overfitting",
+    "question": "At epoch 50, training loss is 0.05 and validation loss is 0.90 (up from 0.20 at epoch 15). Should we keep training?",
+    "correct_answer": "No, the model is overfitting; we should stop training and use the weights from epoch 15.",
+    "student_answer": "Yes, keep training because training loss is still going down towards zero.",
+    "expected_misconception_id": "M6"
+  },
+  {
+    "id": "case_18",
+    "concept": "overfitting",
+    "question": "Why is it important to monitor validation loss during gradient descent instead of only training loss?",
+    "correct_answer": "Validation loss reveals when the model stops learning general patterns and begins memorizing training noise.",
+    "student_answer": "Only training loss matters; as long as training loss decreases on every step, the model is improving.",
+    "expected_misconception_id": "M6"
+  },
+  {
+    "id": "case_19",
+    "concept": "overfitting",
+    "question": "A model trained for 1,000 epochs has near-zero training loss, but validation loss exploded after epoch 30. What happened?",
+    "correct_answer": "The model began overfitting after epoch 30, and training past that point degraded generalization.",
+    "student_answer": "The training was a total success because training loss kept going down all the way to epoch 1,000.",
+    "expected_misconception_id": "M6"
+  },
+  {
+    "id": "case_20",
+    "concept": "overfitting",
+    "question": "What is the purpose of Early Stopping during neural network training?",
+    "correct_answer": "To stop training when validation loss starts increasing, preventing the model from fitting training noise.",
+    "student_answer": "Early stopping is a bad practice because you should always train until training loss hits zero.",
+    "expected_misconception_id": "M6"
+  },
+  {
+    "id": "case_21",
+    "concept": "overfitting",
+    "question": "Why does a model fail to predict accurately on test data?",
+    "correct_answer": "It could be due to underfitting, overfitting, or dataset distribution shift.",
+    "student_answer": "I forgot my password to the Jupyter notebook server.",
+    "expected_misconception_id": "UNKNOWN"
+  },
+  {
+    "id": "case_22",
+    "concept": "overfitting",
+    "question": "Explain the difference between training set and validation set.",
+    "correct_answer": "Training data is used to fit parameters; validation data is used to tune hyperparameters and check generalization.",
+    "student_answer": "Maybe Python is running slow today on Windows.",
+    "expected_misconception_id": "UNKNOWN"
+  },
+  {
+    "id": "case_23",
+    "concept": "overfitting",
+    "question": "What causes high variance in a predictive model?",
+    "correct_answer": "Excessive model complexity relative to data size and lack of regularization.",
+    "student_answer": "Blue is my favorite color for plotting charts.",
+    "expected_misconception_id": "UNKNOWN"
+  },
+  {
+    "id": "case_24",
+    "concept": "overfitting",
+    "question": "How do you detect overfitting in machine learning?",
+    "correct_answer": "By comparing training error and validation error; a large gap indicates overfitting.",
+    "student_answer": "I am not sure what machine learning means.",
+    "expected_misconception_id": "UNKNOWN"
+  }
+]

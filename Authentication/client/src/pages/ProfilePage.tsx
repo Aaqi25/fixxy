@@ -17,7 +17,7 @@ export function ProfilePage() {
           <div className="info-card"><div className="info-card-title">ID</div><div className="info-card-value" style={{ fontSize: '0.75rem', wordBreak: 'break-all' }}>{student?.id}</div></div>
         </div>
         <p style={{ marginTop: '1.5rem', fontSize: '0.875rem', color: '#6b8ba4' }}>
-          Extended profile management will be implemented in Module 2 — Student Profile.
+          Your profile details and learning preferences can be configured here.
         </p>
       </div>
     </div>

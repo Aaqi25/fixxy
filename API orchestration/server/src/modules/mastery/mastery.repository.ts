@@ -34,8 +34,8 @@ export class MasteryRepository {
         COALESCE(m.updated_at, c.updated_at) AS updated_at
       FROM concepts c
       LEFT JOIN student_mastery m ON m.concept_id = c.id AND m.student_id = $1
-      WHERE c.is_active = TRUE
-      ORDER BY c.sort_order ASC, c.title ASC;
+      WHERE c.status = 'ACTIVE'
+      ORDER BY c.display_order ASC, c.title ASC;
     `;
 
     const result = await pool.query(query, [studentId]);
